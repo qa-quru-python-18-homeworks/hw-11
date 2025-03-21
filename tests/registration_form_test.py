@@ -30,4 +30,4 @@ def test_registration_form():
         picture='image.png',
         address='Some address',
         state_and_city='NCR Delhi'
-    ).close_modal()
+    )

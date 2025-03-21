@@ -109,6 +109,10 @@ class RegistrationFormPage:
         s('#submit').click()
         return self
 
+    def __close_modal(self):
+        s('#closeLargeModal').perform(command.js.click)
+        return self
+
     def should_have_submitted(
             self,
             student_name,
@@ -133,8 +137,4 @@ class RegistrationFormPage:
         s('table tbody tr:nth-of-type(8) td:nth-of-type(2)').should(have.text(picture))
         s('table tbody tr:nth-of-type(9) td:nth-of-type(2)').should(have.text(address))
         s('table tbody tr:nth-of-type(10) td:nth-of-type(2)').should(have.text(state_and_city))
-        return self
-
-    def close_modal(self):
-        s('#closeLargeModal').perform(command.js.click)
-        return self
+        self.__close_modal()
