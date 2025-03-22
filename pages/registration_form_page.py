@@ -8,29 +8,27 @@ from utils import attach
 
 class RegistrationFormPage:
 
-    @allure.step("Открыть страницу с формой регистрации")
+    @allure.step("Открыть страницу с формой регистрации студента")
     def open_page(self):
         browser.open("https://demoqa.com/automation-practice-form")
-        browser.driver.execute_script('document.querySelector("#fixedban").remove();')
-        browser.driver.execute_script('document.querySelector("footer").remove();')
+        browser.driver.execute_script("$('#fixedban').remove()")
+        browser.driver.execute_script("$('footer').remove()")
         attach.add_screenshot(browser)
-        attach.add_html(browser)
-        attach.add_logs(browser)
         return self
 
-    @allure.step("Заполнить поле 'First Name'")
+    @allure.step("Заполнить имя")
     def set_first_name(self, value):
         s("#firstName").type(value)
         attach.add_screenshot(browser)
         return self
 
-    @allure.step("Заполнить поле 'Last Name'")
+    @allure.step("Заполнить фамилию")
     def set_last_name(self, value):
         s("#lastName").type(value)
         attach.add_screenshot(browser)
         return self
 
-    @allure.step("Заполнить поле 'Email'")
+    @allure.step("Заполнить электронную почту")
     def set_email(self, value):
         s("#userEmail").type(value)
         attach.add_screenshot(browser)
@@ -47,7 +45,7 @@ class RegistrationFormPage:
         attach.add_screenshot(browser)
         return self
 
-    @allure.step("Заполнить поле 'Mobile'")
+    @allure.step("Заполнить мобильный номер")
     def set_mobile_number(self, value):
         s("#userNumber").type(value)
         attach.add_screenshot(browser)
@@ -84,13 +82,13 @@ class RegistrationFormPage:
         attach.add_screenshot(browser)
         return self
 
-    @allure.step("Загрузить картинку")
+    @allure.step("Загрузить фотографию")
     def upload_picture(self, file_path):
         s("#uploadPicture").send_keys(file_path)
         attach.add_screenshot(browser)
         return self
 
-    @allure.step("Заполнить поле 'Current Address'")
+    @allure.step("Заполнить текущий адрес")
     def set_current_address(self, value):
         s("#currentAddress").type(value)
         attach.add_screenshot(browser)
@@ -110,10 +108,8 @@ class RegistrationFormPage:
         attach.add_screenshot(browser)
         return self
 
-    @allure.step("Нажать кнопку 'Submit'")
+    @allure.step("Нажать кнопку отправки формы")
     def submit(self):
-        attach.add_html(browser)
-        attach.add_logs(browser)
         s("#submit").click()
         attach.add_screenshot(browser)
         return self
@@ -132,9 +128,6 @@ class RegistrationFormPage:
         address,
         state_and_city,
     ):
-        attach.add_screenshot(browser)
-        attach.add_html(browser)
-        attach.add_logs(browser)
         s(".modal-content").should(be.visible)
         s("table tbody tr:nth-of-type(1) td:nth-of-type(2)").should(have.text(student_name))
         s("table tbody tr:nth-of-type(2) td:nth-of-type(2)").should(have.text(student_email))
@@ -148,7 +141,7 @@ class RegistrationFormPage:
         s("table tbody tr:nth-of-type(10) td:nth-of-type(2)").should(have.text(state_and_city))
         return self
 
-    @allure.step("Закрыть модальное окно")
+    @allure.step("Закрыть модальное окно с результатами")
     def close_modal(self):
         s("#closeLargeModal").perform(command.js.click)
         attach.add_screenshot(browser)
