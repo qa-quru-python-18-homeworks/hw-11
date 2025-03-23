@@ -13,6 +13,10 @@ class RegistrationFormPage:
         browser.open("https://demoqa.com/automation-practice-form")
         browser.driver.execute_script("$('#fixedban').remove()")
         browser.driver.execute_script("$('footer').remove()")
+        browser.driver.execute_script("""
+            const ad = document.querySelector('iframe[id^="google_ads_iframe"]');
+            if (ad) ad.remove();
+        """)
         attach.add_screenshot(browser)
         return self
 
